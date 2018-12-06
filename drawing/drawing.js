@@ -8,7 +8,12 @@ class Node {
 		this.name = name;
 		this.x = x;
 		this.y = y;
+    this.paths = [];
 	}
+
+  addPath(value, node) {
+    this.paths.push({ value, node })
+  }
 
 	drawNode () {
 		c.beginPath();
@@ -26,14 +31,16 @@ class Node {
 		c.strokeStyle = 'black'
 	}
 
-	drawArrowToNode (node) {
+	drawArrowToNode (node, value) {
 		let { x, y } = this;
 		let toX = node.x;
 		let toY = node.y
 		let margin = CIRCLE_RADIUS;
+
 		if (x !== toX && y !== toY) {
 			margin = margin / 1.5;
 		}
+
 		if (toX > x) {
 			x += margin;
 			toX -= margin;
@@ -49,23 +56,30 @@ class Node {
 			y -= margin;
 			toY += margin;
 		}
+
 		c.beginPath();
 		c.moveTo(x, y);
 		c.lineTo(toX, toY);
 		c.stroke();
+
+		this.addPath(value, node);
 	}
 }
 
-const node = new Node(50, 50, 'z1')
-node.drawNode()
-
-const node1 = new Node(50, 150, 'z2')
-node1.drawNode();
-
-node.drawArrowToNode(node1);
-
-const node2 = new Node(150, 50, 'z3');
-node2.drawNode();
-node1.drawArrowToNode(node2);
-node2.setGreen();
-node2.drawNode();
+function* nodesGenerator() {
+  const STEP = 100;
+  let x = 0;
+  let y = STEP * 2;
+  let count = 0;
+  while (true) {
+		if (y === STEP) {
+			y += STEP;
+		} else {
+			y -= STEP;
+			x += STEP;
+		}
+		count++;
+		const node = new Node(x, y, `z${count}`)
+    yield node;
+  }
+}
