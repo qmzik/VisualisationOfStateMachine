@@ -1,0 +1,15 @@
+.btn
+{
+    display: block;
+    margin: 10px;
+}
+
+.btn:hover
+{
+    color: black;
+}
+
+.header
+{
+    text-align: center;
+}

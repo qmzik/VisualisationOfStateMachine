@@ -5,12 +5,31 @@
 	<meta name="viewport"
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="dynamicTable.css">
 	<title>Document</title>
 </head>
 <body>
-<canvas id="canvas" width="600" height="600"></canvas>
-<script src="drawing/drawing.js"></script>
-<script src="StateMachine.js"></script>
-<script src="main.js"></script>
+	<a class="btn" href="javascript: addRow()">Добавить строку</a>
+	<a class="btn" href="javascript: deleteRow()">Удалить строку</a>
+	<table id="dynamicTable">
+		<thead class="header">
+			<tr>
+				<td>from</td>
+				<td>value</td>
+				<td>to</td>
+			</tr>
+		</thead>
+		<tr>
+			<td><input name="row1_col0"></td>
+			<td><input name="row1_col1"></td>
+			<td><input name="row1_col2"></td>
+		</tr>
+	</table>
+
+	<canvas id="canvas" width="600" height="600"></canvas>
+	<script src="dynamicTable.js"></script>
+	<script src="drawing/drawing.js"></script>
+	<script src="StateMachine.js"></script>
+	<script src="main.js"></script>
 </body>
 </html>
