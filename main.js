@@ -1,4 +1,4 @@
-const a = {
+/*onst a = {
   init: 'z1',
   ends: ['z3'],
   states: [
@@ -6,9 +6,9 @@ const a = {
     { value: 'b', from: 'z1', to: 'z1' },
     { value: 'b', from: 'z2', to: 'z3' }
   ]
-}
+}/*
 
-const nodes = [];
+/*const nodes = [];
 
 const generator = nodesGenerator();
 
@@ -30,4 +30,4 @@ nodes[0].drawArrowToNode(nodes[5])
 nodes[0].drawArrowToNode(nodes[7])
 nodes[1].drawArrowToNode(nodes[2])
 
-console.log(nodes)
+console.log(nodes)*/

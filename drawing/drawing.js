@@ -32,6 +32,9 @@ class Node {
 	}
 
 	drawArrowToNode (node, value) {
+		if (this.name === node.name) {
+			//рисуем петлю
+		}
 		let { x, y } = this;
 		let toX = node.x;
 		let toY = node.y
@@ -83,3 +86,44 @@ function* nodesGenerator() {
     yield node;
   }
 }
+
+function drawStateMachine (stateMachine) {
+	const nodes = [];
+
+	const generator = nodesGenerator();
+
+	stateMachine.states.forEach(item => {
+		let from = nodes.find(state => state.name === item.from)
+		if (!from) {
+			from = generator.next().value;
+		}
+
+		let to = nodes.find(state => state.name === item.to);
+		if (!to) {
+			to = generator.next().value
+		}
+
+		nodes.push(from)
+		nodes.push(to)
+
+		from.drawArrowToNode(to)
+	})
+
+	nodes.forEach(node => {
+		node.drawNode();
+	})
+}
+
+const a = {
+	init: 'z1',
+	ends: ['z3'],
+	states: [
+		{ value: 'a', from: 'z1', to: 'z2' },
+		{ value: 'b', from: 'z1', to: 'z1' },
+		{ value: 'b', from: 'z2', to: 'z3' },
+		{ value: 'b', from: 'z3', to: 'z1' },
+		{ value: 'b', from: 'z1', to: 'z4' }
+	]
+}
+
+drawStateMachine(a);
