@@ -38,14 +38,18 @@ async function lineProccess (inputString, states) {
 		if (stateMachine.next(char)) {
 			const to = findByName(stateMachine.currentState);
 			await animateTransition(from, to);
-		}
+		} else {
+		  await sleep(TIME_INTERVAL);
+      alert('Автомат закончил выполнение с ошибкой');
+      return;
+    }
 	}
 	await sleep(TIME_INTERVAL);
 	if (stateMachine.canIEnd) {
-		alert('Автомат закончил выполнение успешно');
+		alert(`Автомат закончил выполнение успешно`);
 	} else {
-		alert('Автомат закончил выполнение с ошибкой');
+		alert(`Автомат закончил выполнение с ошибкой\n${stateMachine.current} не является конечным состоянием`);
 	}
 }
 
-lineProccess('ab', a);
+lineProccess('a', a);

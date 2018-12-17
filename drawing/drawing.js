@@ -1,6 +1,7 @@
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
-
+c.lineWidth = 2;
+c.strokeStyle = 'grey';
 const CIRCLE_RADIUS = 20;
 
 class Node {
@@ -27,8 +28,12 @@ class Node {
 		c.strokeStyle = 'green';
 	}
 
+	setRead () {
+		c.strokeStyle = 'red';
+	}
+
 	setDefault () {
-		c.strokeStyle = 'black'
+		c.strokeStyle = 'black';
 	}
 
 	drawArrowToNode (node, value) {
@@ -44,25 +49,28 @@ class Node {
 			margin = margin / 1.5;
 		}
 
+		let toMargin = margin + 3.5
+
 		if (toX > x) {
 			x += margin;
-			toX -= margin;
+			toX -= toMargin;
 		} else if (toX < x) {
 			x -= margin;
-			toX += margin;
+			toX += toMargin;
 		}
 
 		if (toY > y) {
 			y += margin;
-			toY -= margin;
+			toY -= toMargin;
 		} else if (toY < y) {
 			y -= margin;
-			toY += margin;
+			toY += toMargin;
 		}
 
 		c.beginPath();
 		c.moveTo(x, y);
 		c.lineTo(toX, toY);
+    c.arc(toX, toY, 2, 0, 2 * Math.PI);
 		c.stroke();
 
 		this.addPath(value, node);
