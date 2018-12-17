@@ -13,3 +13,24 @@
 {
     text-align: center;
 }
+
+#dynamicTable
+{
+    margin-bottom: 20px;
+}
+
+#dynamicTable input
+{
+    padding: 5px;
+}
+
+.tables
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#uniqueStates
+{
+    margin-left: 150px;
+}
