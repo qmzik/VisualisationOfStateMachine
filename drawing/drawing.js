@@ -71,6 +71,8 @@ class Node {
 		c.moveTo(x, y);
 		c.lineTo(toX, toY);
     c.arc(toX, toY, 2, 0, 2 * Math.PI);
+    c.fillStyle = c.strokeStyle;
+    c.fill();
 		c.stroke();
 
 		this.addPath(value, node);
@@ -104,15 +106,14 @@ function drawStateMachine (stateMachine) {
 		let from = nodes.find(state => state.name === item.from)
 		if (!from) {
 			from = generator.next().value;
+      nodes.push(from);
 		}
 
 		let to = nodes.find(state => state.name === item.to);
 		if (!to) {
 			to = generator.next().value;
+      nodes.push(to);
 		}
-
-		nodes.push(from);
-		nodes.push(to);
 
 		from.drawArrowToNode(to);
 	})
