@@ -46,31 +46,15 @@ function getUniqueStates() {
   const table = document.getElementById('dynamicTable');
   let states = [];
 
-  states.push(table.rows[1].cells[0].childNodes[1].value);
-
-  for (let i = 2; i < table.rows.length; i++) {
+  for (let i = 1; i < table.rows.length; i++) {
     states.push(table.rows[i].cells[0].childNodes[0].value);
   }
 
-  return [...new Set(states)];
+  return [...new Set(states.filter(e => e))];
 }
 
 function drawTable() {
   const table = document.getElementById('uniqueStates');
   const uniqueStates = getUniqueStates();
-  console.log(uniqueStates.length);
-
-  for (let i = 0; i < uniqueStates.length - 1; i++) {
-    table.insertRow();
-  }
-
-  for (let i = 0, j = table.rows[1].cells.length; i < j; i++) {
-    const span = document.createElement('span');
-    const cell = table.insertRow.insertCell();
-
-    cell.appendChild(span);
-  }
-
-  table.rows[1].cells[1].setAttribute('name', 'col2');
-  console.log(table.rows[1].cells[1]);
+  console.log(uniqueStates);
 }
