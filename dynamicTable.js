@@ -47,7 +47,8 @@ function getUniqueStates() {
   let states = [];
 
   for (let i = 1; i < table.rows.length; i++) {
-    states.push(table.rows[i].cells[0].childNodes[0].value);
+    states.push(table.rows[i].cells[0].childNodes[0].value,
+        table.rows[i].cells[2].childNodes[0].value);
   }
 
   return [...new Set(states.filter(e => e))];
@@ -56,5 +57,23 @@ function getUniqueStates() {
 function drawTable() {
   const table = document.getElementById('uniqueStates');
   const uniqueStates = getUniqueStates();
-  console.log(uniqueStates);
+
+  for (let i = 0; i < uniqueStates.length; i++) {
+    const row = table.insertRow();
+
+    for (let i = 0; i < 3; i++) {
+      row.insertCell();
+    }
+  }
+
+  for (let i = 1, j = table.rows.length; i < j; i++) {
+    table.rows[i].cells[0]
+        .appendChild(document.createElement('input'))
+        .setAttribute('type', 'radio');
+    table.rows[i].cells[1]
+        .appendChild(document.createElement('input'))
+        .setAttribute('type', 'checkbox');
+    table.rows[i].cells[2]
+        .appendChild(document.createTextNode(uniqueStates[i - 1]));
+  }
 }

@@ -16,6 +16,7 @@
 
 #dynamicTable
 {
+    border-spacing: 1px;
     margin-bottom: 20px;
 }
 
@@ -33,4 +34,10 @@
 #uniqueStates
 {
     margin-left: 150px;
+}
+
+#uniqueStates td
+{
+    padding: 10px;
+    border: 1px solid black;
 }

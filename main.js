@@ -27,7 +27,7 @@ async function animateTransition (from, to) {
 	to.drawNode();
 }
 
-async function lineProccess (inputString, states) {
+async function lineProccess(inputString, states) {
 	const stateMachine = new StateMachine(states);
 	const nodes = drawStateMachine(states);
 	const findByName = name => nodes.find(node => node.name === name);
