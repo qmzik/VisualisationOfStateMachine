@@ -67,12 +67,14 @@ function drawTable() {
   }
 
   for (let i = 1, j = table.rows.length; i < j; i++) {
-    table.rows[i].cells[0]
-        .appendChild(document.createElement('input'))
-        .setAttribute('type', 'radio');
-    table.rows[i].cells[1]
-        .appendChild(document.createElement('input'))
-        .setAttribute('type', 'checkbox');
+    const initState = document.createElement('input');
+    initState.setAttribute('type', 'radio');
+
+    const endState = document.createElement('input');
+    endState.setAttribute('type', 'checkbox');
+
+    table.rows[i].cells[0].appendChild(initState);
+    table.rows[i].cells[1].appendChild(endState);
     table.rows[i].cells[2]
         .appendChild(document.createTextNode(uniqueStates[i - 1]));
   }
