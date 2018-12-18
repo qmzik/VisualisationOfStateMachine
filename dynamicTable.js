@@ -61,7 +61,7 @@ function drawTable() {
   for (let i = 0; i < uniqueStates.length; i++) {
     const row = table.insertRow();
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < table.rows[0].cells.length; i++) {
       row.insertCell();
     }
   }
