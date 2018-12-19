@@ -69,6 +69,7 @@ function drawTable() {
   for (let i = 1, j = table.rows.length; i < j; i++) {
     const initState = document.createElement('input');
     initState.setAttribute('type', 'radio');
+    initState.setAttribute('name', 'init');
 
     const endState = document.createElement('input');
     endState.setAttribute('type', 'checkbox');
