@@ -41,3 +41,17 @@
     padding: 10px;
     border: 1px solid black;
 }
+
+#word {
+    margin-top: 30px;
+}
+
+#word input
+{
+    margin-top: 10px;
+}
+
+#word input, label
+{
+    display: block;
+}

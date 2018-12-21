@@ -80,4 +80,47 @@ function drawTable() {
     table.rows[i].cells[2]
         .appendChild(document.createTextNode(uniqueStates[i - 1]));
   }
+
+
+}
+
+function createMachine() {
+  const tableState = document.getElementById('uniqueStates');
+  const tableMachine = document.getElementById('dynamicTable');
+
+  let machine = {
+    init: '',
+    ends: [],
+    states: []
+  };
+
+  const word = document.getElementById('word').children[0].children[0].value;
+  console.log(word);
+
+  for (let i = 1, j = tableState.rows.length; i < j; i++) {
+    const value = tableState.rows[i].cells[2].textContent;
+
+    if (tableState.rows[i].cells[0].childNodes[0].checked === true) {
+      machine.init = value;
+    }
+
+    if (tableState.rows[i].cells[1].childNodes[0].checked === true) {
+      machine.ends.push(value);
+    }
+  }
+
+  for (let i = 1, j = tableMachine.rows.length; i < j; i++) {
+    const letter = tableMachine.rows[i].children[1].childNodes[0].value;
+    const fromValue = tableMachine.rows[i].children[0].childNodes[0].value;
+    const toValue = tableMachine.rows[i].children[2].childNodes[0].value;
+
+    if (letter !== '' || fromValue !== '' || toValue !== '') {
+      machine.states.push({
+        value: letter,
+        from: fromValue,
+        to: toValue
+      })
+    }
+  }
+  return lineProccess(word, machine)
 }
