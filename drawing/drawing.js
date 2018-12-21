@@ -103,12 +103,19 @@ function* nodesGenerator() {
 			x += STEP;
 		}
 		count++;
-		const node = new Node(x, y, `z${count}`)
+		const node = new Node(x, y, ``)
     yield node;
   }
 }
 
 function drawStateMachine (stateMachine) {
+	try {
+		checkStates(stateMachine.states);
+	}
+	catch (e) {
+		alert('Детерминированный автомат не должен иметь несколько переходов по одному значению из одного и того же узла');
+		return;
+	}
 	const nodes = [];
 
 	const generator = nodesGenerator();
@@ -117,12 +124,14 @@ function drawStateMachine (stateMachine) {
 		let from = nodes.find(state => state.name === item.from)
 		if (!from) {
 			from = generator.next().value;
+			from.name = item.from;
       nodes.push(from);
 		}
 
 		let to = nodes.find(state => state.name === item.to);
 		if (!to) {
 			to = generator.next().value;
+			to.name = item.to;
       nodes.push(to);
 		}
 

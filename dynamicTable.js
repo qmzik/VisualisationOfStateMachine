@@ -122,5 +122,6 @@ function createMachine() {
       })
     }
   }
-  return lineProccess(word, machine)
+  console.log(word, machine)
+  return drawStateMachine(machine)
 }
