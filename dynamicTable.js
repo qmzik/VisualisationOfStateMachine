@@ -9,15 +9,10 @@ function addRow() {
     input.setAttribute('name',
         `row${table.rows.length - 1}_col${i}`);
 
-    if (input.getAttribute('name').indexOf('col0') + 1) {
+    if (input.getAttribute('name').indexOf('col0') + 1 ||
+        input.getAttribute('name').indexOf('col2') + 1) {
       input.setAttribute('pattern', '[a-z]{1}[1-9]{1}');
-    }
-
-    if (input.getAttribute('name').indexOf('col2') + 1) {
-      input.setAttribute('pattern', '[a-z]{1}[1-9]{1}');
-    }
-
-    if (input.getAttribute('name').indexOf('col1') + 1) {
+    } else {
       input.setAttribute('pattern', '[a-z]{1}');
     }
 
@@ -57,6 +52,12 @@ function getUniqueStates() {
 function drawTable() {
   const table = document.getElementById('uniqueStates');
   const uniqueStates = getUniqueStates();
+
+  if (table.rows.length > 1) {
+    for (let i = 1, j = table.rows.length; i < j; i++) {
+      table.deleteRow(table.rows.length - 1);
+    }
+  }
 
   for (let i = 0; i < uniqueStates.length; i++) {
     const row = table.insertRow();
