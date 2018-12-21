@@ -37,9 +37,6 @@ class Node {
 	}
 
 	drawArrowToNode (node, value) {
-		if (this.name === node.name) {
-			//рисуем петлю
-		}
 		let { x, y } = this;
 		let toX = node.x;
 		let toY = node.y
@@ -67,12 +64,26 @@ class Node {
 			toY += toMargin;
 		}
 
-		c.beginPath();
-		c.moveTo(x, y);
-		c.lineTo(toX, toY);
-    c.arc(toX, toY, 2, 0, 2 * Math.PI);
-    c.fillStyle = c.strokeStyle;
-    c.fill();
+		if (this.name === node.name) {
+			c.save();
+			c.beginPath();
+			c.translate(x, y - CIRCLE_RADIUS * 2);
+			c.scale(15 / 20, 1);
+			c.arc(0, 0, 20, 0, Math.PI * 2, true);
+			c.restore();
+			c.closePath();
+			toY -= CIRCLE_RADIUS;
+		} else {
+			c.beginPath();
+			c.moveTo(x, y);
+			c.lineTo(toX, toY);
+		}
+		c.stroke();
+
+		c.beginPath()
+		c.arc(toX, toY, 2, 0, 2 * Math.PI);
+		c.fillStyle = c.strokeStyle;
+		c.fill();
 		c.stroke();
 
 		this.addPath(value, node);

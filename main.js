@@ -6,7 +6,8 @@ const a = {
 	states: [
 		{ value: 'a', from: 'z1', to: 'z2' },
 		{ value: 'b', from: 'z2', to: 'z3' },
-		{ value: 'b', from: 'z3', to: 'z1' }
+		{ value: 'b', from: 'z3', to: 'z1' },
+		{ value: 'b', from: 'z1', to: 'z1' },
 	]
 }
 
@@ -51,4 +52,4 @@ async function lineProccess(inputString, states) {
 	}
 }
 
-lineProccess('a', a);
+lineProccess('ba', a);
