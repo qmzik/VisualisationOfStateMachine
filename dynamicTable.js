@@ -41,7 +41,9 @@ function deleteRow( ) {
 
 function getUniqueStates() {
   const table = document.getElementById('dynamicTable');
+
   let states = [];
+
 
   for (let i = 1; i < table.rows.length; i++) {
     states.push(table.rows[i].cells[0].childNodes[0].value,
@@ -51,8 +53,24 @@ function getUniqueStates() {
   return [...new Set(states.filter(e => e))];
 }
 
+
 function drawTable() {
   const table = document.getElementById('uniqueStates');
+  const dynamicTable = document.getElementById('dynamicTable');
+  const regexp = /[a-z][1-9]/;
+  const valueRegexp = /^[a-z]$/;
+
+  for (let i = 1; i < dynamicTable.rows.length; i++) {
+    if (valueRegexp.test(dynamicTable.rows[i].cells[1].childNodes[0].value) === false ||
+        regexp.test(dynamicTable.rows[i].cells[0].childNodes[0].value) === false ||
+        regexp.test(dynamicTable.rows[i].cells[2].childNodes[0].value) === false) {
+      alert(`Введены некорректные данные в строке №${i}`);
+      return;
+    }
+  }
+
+  console.log(dynamicTable.rows[1].cells[1].childNodes[0].value);
+
   const uniqueStates = getUniqueStates();
 
   if (table.rows.length > 1) {
@@ -68,7 +86,7 @@ function drawTable() {
       row.insertCell();
     }
   }
-
+  
   for (let i = 1, j = table.rows.length; i < j; i++) {
     const initState = document.createElement('input');
     initState.setAttribute('type', 'radio');
@@ -95,7 +113,8 @@ function createMachine() {
     states: []
   };
 
-  const word = document.getElementById('word').children[0].children[0].value;
+  const word = document.getElementById('word').children[0]
+    .children[0].value;
   console.log(word);
 
   for (let i = 1, j = tableState.rows.length; i < j; i++) {
