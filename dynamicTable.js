@@ -1,3 +1,5 @@
+let stateMachine = {};
+
 function addRow() {
   const table = document.getElementById('dynamicTable');
   const row = table.insertRow();
@@ -11,7 +13,7 @@ function addRow() {
 
     if (input.getAttribute('name').indexOf('col0') + 1 ||
         input.getAttribute('name').indexOf('col2') + 1) {
-      input.setAttribute('pattern', '[a-z]{1}[1-9]{1}');
+      input.setAttribute('pattern', '[a-z][1}[1-9]{1}');
     } else {
       input.setAttribute('pattern', '[a-z]{1}');
     }
@@ -26,7 +28,7 @@ function addRow() {
   }
 }
 
-function deleteRow() {
+function deleteRow( ) {
   const table = document.getElementById('dynamicTable');
 
   if (table.rows.length < 3) {
@@ -75,13 +77,12 @@ function drawTable() {
     const endState = document.createElement('input');
     endState.setAttribute('type', 'checkbox');
 
+    const stateValue = document.createTextNode(uniqueStates[i - 1]);
+
     table.rows[i].cells[0].appendChild(initState);
     table.rows[i].cells[1].appendChild(endState);
-    table.rows[i].cells[2]
-        .appendChild(document.createTextNode(uniqueStates[i - 1]));
+    table.rows[i].cells[2].appendChild(stateValue);
   }
-
-
 }
 
 function createMachine() {
@@ -122,6 +123,9 @@ function createMachine() {
       })
     }
   }
-  console.log(word, machine)
-  return drawStateMachine(machine)
+
+  stateMachine = machine;
+
+  console.log(word, stateMachine);
+  return drawStateMachine(stateMachine);
 }

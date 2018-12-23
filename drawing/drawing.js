@@ -109,6 +109,8 @@ function* nodesGenerator() {
 }
 
 function drawStateMachine (stateMachine) {
+	c.clearRect(0, 0, canvas.width, canvas.height);
+
 	try {
 		checkStates(stateMachine.states);
 	}
