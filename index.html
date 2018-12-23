@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="container">
-	<a class="btn" href="javascript: addRow()">Добавить строку</a>
-	<a class="btn" href="javascript: deleteRow()">Удалить строку</a>
+	<a class="btn" href="javascript: addRowInDynamicTable()">Добавить строку</a>
+	<a class="btn" href="javascript: deleteRowInDynamicTable()">Удалить строку</a>
 	<div class="tables">
 		<table id="dynamicTable">
 			<thead class="header">
@@ -46,9 +46,10 @@
 		</table>
 	</div>
 	<div class="btn-done">
-		<button onclick="drawTable()">Закончить построение
+		<button onclick="drawUniqueStatesTable()">Закончить построение
 			первой таблицы</button>
-		<button onclick="createMachine()">Построить автомат</button>
+		<button id="draw" onclick="createMachine()">Построить
+			автомат</button>
 	</div>
 	<div id="word">
 		<label>Введите слово
