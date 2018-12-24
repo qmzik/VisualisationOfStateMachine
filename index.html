@@ -12,39 +12,31 @@
 <div class="container">
 	<a class="btn" href="javascript: addRowInDynamicTable()">Добавить строку</a>
 	<a class="btn" href="javascript: deleteRowInDynamicTable()">Удалить строку</a>
-	<div class="tables">
-		<table id="dynamicTable">
-			<thead class="header">
-			<tr>
-				<td>from</td>
-				<td>value</td>
-				<td>to</td>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td><input type="text" name="row1_col0"
-						   pattern="[a-z]{1}[1-9]{1}"></td>
-				<td><input type="text" name="row1_col1"
-						   pattern="[a-z]{1}"></td>
-				<td><input type="text" name="row1_col2"
-						   pattern="[a-z]{1}[1-9]{1}"></td>
-			</tr>
-			</tbody>
-			<tfoot></tfoot>
-		</table>
-		<table id="uniqueStates">
-			<thead class="header">
-			<tr>
-				<td>начальное</td>
-				<td>конечное</td>
-				<td>номер состояния</td>
-			</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-	</div>
+        <div>
+            <table id="dynamicTable">
+                <thead class="header">
+                <tr>
+                    <td>from</td>
+                    <td>value</td>
+                    <td>to</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="text" name="row1_col0"
+                               pattern="[a-z]{1}[1-9]{1}"
+                               maxlength="2"></td>
+                    <td><input type="text" name="row1_col1"
+                               pattern="[a-z]{1}"
+                               maxlength="1"></td>
+                    <td><input type="text" name="row1_col2"
+                               pattern="[a-z]{1}[1-9]{1}"
+                               maxlength="2"></td>
+                </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
 	<div class="btn-done">
 		<button onclick="drawUniqueStatesTable()">Закончить построение
 			первой таблицы</button>
@@ -56,8 +48,21 @@
 			<input type="text">
 		</label>
 	</div>
+    <canvas id="canvas" width="600" height="600"></canvas>
 </div>
-<canvas id="canvas" width="600" height="600"></canvas>
+<div>
+    <table id="uniqueStates">
+        <thead class="header">
+        <tr>
+            <td>начальное</td>
+            <td>конечное</td>
+            <td>номер состояния</td>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 <script src="dynamicTable.js"></script>
 <script src="drawing/drawing.js"></script>
 <script src="StateMachine.js"></script>

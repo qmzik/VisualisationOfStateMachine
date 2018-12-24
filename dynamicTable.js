@@ -16,8 +16,10 @@ function addRowInDynamicTable() {
     if (input.getAttribute('name').indexOf('col0') + 1 ||
         input.getAttribute('name').indexOf('col2') + 1) {
       input.setAttribute('pattern', '^[a-z][1-9]$');
+      input.setAttribute('maxlength', '2')
     } else {
       input.setAttribute('pattern', '^[a-z]$');
+      input.setAttribute('maxlength', '1')
     }
 
     if (dynamicTable.rows.length > 21) {
@@ -41,7 +43,24 @@ function deleteRowInDynamicTable( ) {
 }
 
 function drawUniqueStatesTable() {
-  uniqueStatesTablePreparation();
+  clearUniqueStateTable();
+
+  const regexp = /^[a-z][1-9]$/;
+  const valueRegexp = /^[a-z]$/;
+
+  for (let i = 1; i < dynamicTable.rows.length; i++) {
+    const fromValue = dynamicTable.rows[i].cells[0].childNodes[0].value;
+    const valueState = dynamicTable.rows[i].cells[1].childNodes[0].value;
+    const toValue = dynamicTable.rows[i].cells[2].childNodes[0].value;
+
+    if (valueRegexp.test(valueState) === false ||
+      regexp.test(fromValue) === false ||
+      regexp.test(toValue) === false) {
+      alert(`Введены некорректные данные в строке №${i}`);
+
+      return;
+    }
+  }
 
   const uniqueStates = getUniqueStates();
 
@@ -69,15 +88,6 @@ function drawUniqueStatesTable() {
   }
 }
 
-function uniqueStatesTablePreparation() {
-
-  if (checkValueInDynamicTable() === false) {
-    return;
-  }
-
-  clearUniqueStateTable();
-}
-
 function getUniqueStates() {
   let states = [];
 
@@ -89,27 +99,6 @@ function getUniqueStates() {
   }
 
   return [...new Set(states.filter(e => e))];
-}
-
-function checkValueInDynamicTable() {
-  const regexp = /^[a-z][1-9]$/;
-  const valueRegexp = /^[a-z]$/;
-
-  for (let i = 1; i < dynamicTable.rows.length; i++) {
-    const fromValue = dynamicTable.rows[i].cells[0].childNodes[0].value;
-    const valueState = dynamicTable.rows[i].cells[1].childNodes[0].value;
-    const toValue = dynamicTable.rows[i].cells[2].childNodes[0].value;
-
-    if (valueRegexp.test(valueState) === false ||
-      regexp.test(fromValue) === false ||
-      regexp.test(toValue) === false) {
-      alert(`Введены некорректные данные в строке №${i}`);
-
-      return false;
-    }
-  }
-
-  return true;
 }
 
 function clearUniqueStateTable() {
