@@ -110,6 +110,7 @@ function* nodesGenerator() {
 
 function drawStateMachine (stateMachine) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
+	c.strokeStyle = 'grey';
 
 	try {
 		checkStates(stateMachine.states);

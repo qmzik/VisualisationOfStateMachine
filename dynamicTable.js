@@ -115,7 +115,7 @@ function getUniqueStates() {
 function clearUniqueStateTable() {
   if (uniqueStatesTable.rows.length > 1) {
     for (let i = 1, j = uniqueStatesTable.rows.length; i < j; i++) {
-      uniqueStatesTable.deleteRow(uniqueStatesTable.rows.length - 1);
+      uniqueStatesTable.deleteRow(j - 1);
     }
   }
 }
@@ -161,9 +161,9 @@ function createMachine() {
 }
 
 let btn = document.getElementById('btn');
-btn.addEventListener('click', foo, false);
+btn.addEventListener('click', checkWord, false);
 
-function foo() {
+function checkWord() {
   const word = document.getElementById('checkWord');
 
   return lineProccess(word.value, stateMachine);
