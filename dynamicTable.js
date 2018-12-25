@@ -1,7 +1,11 @@
 const uniqueStatesTable = document.getElementById('uniqueStates');
 const dynamicTable = document.getElementById('dynamicTable');
 
-let stateMachine = {};
+let stateMachine = {
+  init: '',
+  ends: [],
+  states: []
+};
 
 function addRowInDynamicTable() {
   const row = dynamicTable.insertRow();
@@ -11,13 +15,19 @@ function addRowInDynamicTable() {
 
     input.setAttribute('type', 'text');
     input.setAttribute('name',
-        `row${dynamicTable.rows.length - 1}_col${i}`);
+        `col${i}`);
 
-    if (input.getAttribute('name').indexOf('col0') + 1 ||
-        input.getAttribute('name').indexOf('col2') + 1) {
+    if (input.getAttribute('name').indexOf('col0') + 1) {
       input.setAttribute('pattern', '^[a-z][1-9]$');
       input.setAttribute('maxlength', '2')
-    } else {
+    }
+
+    if (input.getAttribute('name').indexOf('col2') + 1) {
+      input.setAttribute('pattern', '^[a-z][1-9]$');
+      input.setAttribute('maxlength', '2')
+    }
+
+    if (input.getAttribute('name').indexOf('col1') + 1) {
       input.setAttribute('pattern', '^[a-z]$');
       input.setAttribute('maxlength', '1')
     }
@@ -53,8 +63,7 @@ function drawUniqueStatesTable() {
     const valueState = dynamicTable.rows[i].cells[1].childNodes[0].value;
     const toValue = dynamicTable.rows[i].cells[2].childNodes[0].value;
 
-    if (valueRegexp.test(valueState) === false ||
-      regexp.test(fromValue) === false ||
+    if (valueRegexp.test(valueState) === false || regexp.test(fromValue) === false ||
       regexp.test(toValue) === false) {
       alert(`Введены некорректные данные в строке №${i}`);
 
@@ -79,6 +88,7 @@ function drawUniqueStatesTable() {
 
     const endState = document.createElement('input');
     endState.setAttribute('type', 'checkbox');
+    endState.setAttribute('name', 'ends');
 
     const stateValue = document.createTextNode(uniqueStates[i - 1]);
 
@@ -87,6 +97,7 @@ function drawUniqueStatesTable() {
     uniqueStatesTable.rows[i].cells[2].appendChild(stateValue);
   }
 }
+
 
 function getUniqueStates() {
   let states = [];
@@ -121,11 +132,11 @@ function createMachine() {
     const initChecked = uniqueStatesTable.rows[i].cells[0].childNodes[0].checked;
     const endsChecked = uniqueStatesTable.rows[i].cells[1].childNodes[0].checked;
 
-    if (initChecked === true) {
+    if (initChecked) {
       machine.init = value;
     }
 
-    if (endsChecked === true) {
+    if (endsChecked) {
       machine.ends.push(value);
     }
   }
@@ -147,4 +158,13 @@ function createMachine() {
   stateMachine = machine;
 
   return drawStateMachine(stateMachine);
+}
+
+let btn = document.getElementById('btn');
+btn.addEventListener('click', foo, false);
+
+function foo() {
+  const word = document.getElementById('checkWord');
+
+  return lineProccess(word.value, stateMachine);
 }

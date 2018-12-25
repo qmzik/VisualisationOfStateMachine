@@ -45,22 +45,25 @@
 	</div>
 	<div id="word">
 		<label>Введите слово
-			<input type="text">
+			<input id="checkWord" type="text">
 		</label>
+        <div class="btn-word">
+            <button id="btn">
+                Проверить слово
+            </button>
+        </div>
 	</div>
     <canvas id="canvas" width="600" height="600"></canvas>
 </div>
 <div>
     <table id="uniqueStates">
         <thead class="header">
-        <tr>
-            <td>начальное</td>
-            <td>конечное</td>
-            <td>номер состояния</td>
-        </tr>
+            <tr>
+                <td>начальное</td>
+                <td>конечное</td>
+                <td>номер состояния</td>
+            </tr>
         </thead>
-        <tbody>
-        </tbody>
     </table>
 </div>
 <script src="dynamicTable.js"></script>
