@@ -53,7 +53,11 @@ function deleteRowInDynamicTable( ) {
 }
 
 function drawUniqueStatesTable() {
-  clearUniqueStateTable();
+  if (uniqueStatesTable.rows.length > 1) {
+    for (let i = 1, j = uniqueStatesTable.rows.length; i < j; i++) {
+      uniqueStatesTable.deleteRow(uniqueStatesTable.rows.length - 1);
+    }
+  }
 
   const regexp = /^[a-z][1-9]$/;
   const valueRegexp = /^[a-z]$/;
@@ -110,14 +114,6 @@ function getUniqueStates() {
   }
 
   return [...new Set(states.filter(e => e))];
-}
-
-function clearUniqueStateTable() {
-  if (uniqueStatesTable.rows.length > 1) {
-    for (let i = 1, j = uniqueStatesTable.rows.length; i < j; i++) {
-      uniqueStatesTable.deleteRow(j - 1);
-    }
-  }
 }
 
 function createMachine() {
